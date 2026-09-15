@@ -1653,3 +1653,149 @@ footer {
     font-size: 15px !important;
     font-weight: 800 !important;
 }
+/* =========================================
+   CYBERCITY SMART ALERT CENTER
+   ========================================= */
+
+.smart-alerts {
+    width: 100%;
+    max-width: 1200px;
+    margin: 70px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.smart-alerts .section-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.smart-alerts .section-tag {
+    color: #00eaff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.smart-alerts h2 {
+    margin: 8px 0;
+    font-size: 32px;
+    color: #ffffff;
+}
+
+.smart-alerts .section-heading p {
+    color: #8293aa;
+}
+
+/* MAIN STATUS */
+
+.alert-status {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px;
+    margin-bottom: 25px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(0,234,255,0.08),
+        rgba(0,255,157,0.04)
+    );
+
+    border: 1px solid rgba(0,234,255,0.35);
+    border-radius: 16px;
+
+    box-shadow:
+        0 0 25px rgba(0,234,255,0.08);
+
+    box-sizing: border-box;
+}
+
+.alert-icon {
+    font-size: 38px;
+}
+
+.alert-status strong {
+    color: #ffffff;
+    font-size: 17px;
+}
+
+.alert-status p {
+    margin: 6px 0 0;
+    color: #8fa1b8;
+    font-size: 14px;
+}
+
+/* ALERT CARDS */
+
+.alert-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.alert-card {
+    padding: 22px;
+    min-height: 160px;
+
+    background: rgba(5, 13, 25, 0.9);
+
+    border: 1px solid rgba(0,234,255,0.18);
+    border-radius: 16px;
+
+    transition: 0.3s ease;
+    box-sizing: border-box;
+}
+
+.alert-card:hover {
+    transform: translateY(-5px);
+    border-color: #00eaff;
+    box-shadow: 0 0 25px rgba(0,234,255,0.12);
+}
+
+.alert-card span {
+    font-size: 30px;
+}
+
+.alert-card h3 {
+    margin: 12px 0 8px;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.alert-card strong {
+    color: #00ff9d;
+    font-size: 13px;
+}
+
+.alert-card p {
+    color: #71849c;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .smart-alerts {
+        margin: 50px auto;
+        padding: 0 15px;
+    }
+
+    .smart-alerts h2 {
+        font-size: 26px;
+    }
+
+    .alert-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .alert-status {
+        padding: 18px;
+    }
+
+    .alert-card {
+        min-height: 135px;
+    }
+}
