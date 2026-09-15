@@ -5,7 +5,7 @@
 
 
 // ==========================================
-// EXPLORE CITY BUTTON
+// EXPLORE CITY
 // ==========================================
 
 function exploreCity() {
@@ -20,7 +20,7 @@ function exploreCity() {
 
 
 // ==========================================
-// CREATE CITY MAP
+// MAP
 // ==========================================
 
 const cityMap = L.map("cityMap").setView(
@@ -28,10 +28,6 @@ const cityMap = L.map("cityMap").setView(
     12
 );
 
-
-// ==========================================
-// OPENSTREETMAP
-// ==========================================
 
 L.tileLayer(
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -52,10 +48,7 @@ const locations = [
         name: "Central City",
         lat: 12.9716,
         lng: 77.5946,
-
-        description:
-            "Central urban monitoring zone.",
-
+        description: "Central urban monitoring zone.",
         traffic: "Heavy",
         air: "Moderate",
         water: "Normal",
@@ -64,15 +57,11 @@ const locations = [
         parking: "18 slots"
     },
 
-
     {
         name: "Technology District",
         lat: 12.9352,
         lng: 77.6245,
-
-        description:
-            "High-density technology and business zone.",
-
+        description: "High-density technology and business zone.",
         traffic: "Very Heavy",
         air: "Good",
         water: "Normal",
@@ -81,15 +70,11 @@ const locations = [
         parking: "42 slots"
     },
 
-
     {
         name: "Green Zone",
         lat: 12.9980,
         lng: 77.5500,
-
-        description:
-            "Urban green and residential monitoring zone.",
-
+        description: "Urban green and residential monitoring zone.",
         traffic: "Low",
         air: "Excellent",
         water: "Good",
@@ -98,15 +83,11 @@ const locations = [
         parking: "27 slots"
     },
 
-
     {
         name: "Industrial Zone",
         lat: 12.9950,
         lng: 77.7000,
-
-        description:
-            "Industrial infrastructure monitoring zone.",
-
+        description: "Industrial infrastructure monitoring zone.",
         traffic: "Moderate",
         air: "Poor",
         water: "Normal",
@@ -115,15 +96,11 @@ const locations = [
         parking: "11 slots"
     },
 
-
     {
         name: "Transport Hub",
         lat: 12.9784,
         lng: 77.5725,
-
-        description:
-            "Major public transportation monitoring zone.",
-
+        description: "Major public transportation monitoring zone.",
         traffic: "Heavy",
         air: "Moderate",
         water: "Normal",
@@ -136,7 +113,7 @@ const locations = [
 
 
 // ==========================================
-// ADD MAP MARKERS
+// MAP MARKERS
 // ==========================================
 
 locations.forEach(function(location) {
@@ -155,90 +132,77 @@ locations.forEach(function(location) {
     );
 
 
-    marker.on(
-        "click",
-        function() {
+    marker.on("click", function() {
 
-            showLocation(location);
+        showLocation(location);
 
-        }
-    );
+    });
 
 });
 
 
 // ==========================================
-// SHOW LOCATION INFORMATION
+// SHOW LOCATION
 // ==========================================
 
 function showLocation(location) {
 
     document.getElementById(
         "locationName"
-    ).textContent =
-        location.name;
+    ).textContent = location.name;
 
 
     document.getElementById(
         "locationDescription"
-    ).textContent =
-        location.description;
+    ).textContent = location.description;
 
 
     document.getElementById(
         "trafficData"
-    ).textContent =
-        location.traffic;
+    ).textContent = location.traffic;
 
 
     document.getElementById(
         "airData"
-    ).textContent =
-        location.air;
+    ).textContent = location.air;
 
 
     document.getElementById(
         "waterData"
-    ).textContent =
-        location.water;
+    ).textContent = location.water;
 
 
     document.getElementById(
         "energyData"
-    ).textContent =
-        location.energy;
+    ).textContent = location.energy;
 
 
     document.getElementById(
         "lightData"
-    ).textContent =
-        location.light;
+    ).textContent = location.light;
 
 
     document.getElementById(
         "parkingData"
-    ).textContent =
-        location.parking;
+    ).textContent = location.parking;
 
 
     document.getElementById(
         "locationPanel"
-    ).style.display =
-        "block";
+    ).style.display = "block";
 
 }
 
 
 // ==========================================
-// CLOSE LOCATION PANEL
+// CLOSE LOCATION
 // ==========================================
 
 function closeLocation() {
 
     document.getElementById(
         "locationPanel"
-    ).style.display =
-        "none";
+    ).style.display = "none";
 
 }
 
@@ -250,22 +214,27 @@ function closeLocation() {
 function analyzeStreet() {
 
     const input =
-        document.getElementById(
-            "streetSearch"
-        );
+        document.getElementById("streetSearch");
 
 
     const result =
-        document.getElementById(
-            "analysisResult"
-        );
+        document.getElementById("analysisResult");
+
+
+    if (!input || !result) {
+
+        alert("Street Intelligence system could not load.");
+
+        return;
+
+    }
 
 
     const street =
         input.value.trim();
 
 
-    // Check empty input
+    // EMPTY INPUT
 
     if (street === "") {
 
@@ -282,8 +251,7 @@ function analyzeStreet() {
                 </h3>
 
                 <p>
-                    Please enter a location
-                    to begin analysis.
+                    Please enter a location first.
                 </p>
 
             </div>
@@ -296,10 +264,10 @@ function analyzeStreet() {
 
 
     // ==========================================
-    // SIMULATED INTELLIGENCE DATA
+    // DEMO INTELLIGENCE DATA
     // ==========================================
 
-    const trafficLevels = [
+    const trafficOptions = [
         "Low",
         "Moderate",
         "High",
@@ -307,7 +275,7 @@ function analyzeStreet() {
     ];
 
 
-    const airLevels = [
+    const airOptions = [
         "Excellent",
         "Good",
         "Moderate",
@@ -316,60 +284,53 @@ function analyzeStreet() {
 
 
     const traffic =
-        trafficLevels[
+        trafficOptions[
             Math.floor(
-                Math.random() *
-                trafficLevels.length
+                Math.random() * trafficOptions.length
             )
         ];
 
 
     const air =
-        airLevels[
+        airOptions[
             Math.floor(
-                Math.random() *
-                airLevels.length
+                Math.random() * airOptions.length
             )
         ];
 
 
     const water =
         Math.floor(
-            70 +
-            Math.random() * 30
-        );
+            Math.random() * 31
+        ) + 70;
 
 
     const energy =
         Math.floor(
-            50 +
-            Math.random() * 45
-        );
+            Math.random() * 46
+        ) + 50;
 
 
     const lighting =
         Math.floor(
-            80 +
-            Math.random() * 20
-        );
+            Math.random() * 21
+        ) + 80;
 
 
     const parking =
         Math.floor(
-            5 +
-            Math.random() * 50
-        );
+            Math.random() * 46
+        ) + 5;
 
 
     const safety =
         Math.floor(
-            70 +
-            Math.random() * 30
-        );
+            Math.random() * 31
+        ) + 70;
 
 
     // ==========================================
-    // CALCULATE CITY HEALTH SCORE
+    // SCORE CALCULATION
     // ==========================================
 
     const trafficScore = {
@@ -429,14 +390,14 @@ function analyzeStreet() {
     if (traffic === "Very High") {
 
         insight =
-            "Traffic congestion is significantly elevated. Traffic optimization is recommended.";
+            "Traffic congestion is significantly elevated. Intelligent traffic optimization is recommended.";
 
     }
 
     else if (traffic === "High") {
 
         insight =
-            "Traffic is above normal levels. Intelligent traffic management may improve flow.";
+            "Traffic is above normal levels. Smart traffic management could improve urban mobility.";
 
     }
 
@@ -481,6 +442,7 @@ function analyzeStreet() {
                 </h3>
 
             </div>
+
 
             <div class="health-score">
 
@@ -623,10 +585,72 @@ function analyzeStreet() {
         <div class="data-note">
 
             DEMO INTELLIGENCE ENGINE •
-            REAL-TIME APIs WILL BE CONNECTED IN A LATER STAGE
+            REAL-TIME APIs WILL BE CONNECTED LATER
 
         </div>
 
     `;
 
 }
+
+
+// ==========================================
+// MAKE FUNCTION AVAILABLE TO HTML BUTTON
+// ==========================================
+
+window.analyzeStreet = analyzeStreet;
+
+window.exploreCity = exploreCity;
+
+window.closeLocation = closeLocation;
+
+window.showLocation = showLocation;
+
+
+// ==========================================
+// ENTER KEY SUPPORT
+// ==========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const input =
+            document.getElementById("streetSearch");
+
+
+        const button =
+            document.querySelector(
+                ".search-area button"
+            );
+
+
+        if (input) {
+
+            input.addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (event.key === "Enter") {
+
+                        analyzeStreet();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        if (button) {
+
+            button.addEventListener(
+                "click",
+                analyzeStreet
+            );
+
+        }
+
+    }
+);
