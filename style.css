@@ -675,3 +675,45 @@
     }
 
 }
+/* ==========================================
+   FINAL MOBILE CHART FIX
+   ========================================== */
+
+.historical-section,
+.chart-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.chart-container canvas {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 230px !important;
+}
+
+@media (max-width: 600px) {
+
+    .historical-section {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .chart-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 6px;
+        margin: 12px 0;
+        overflow: hidden;
+    }
+
+    .chart-container canvas {
+        width: 100% !important;
+        height: 220px !important;
+    }
+
+}
