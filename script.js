@@ -1,6 +1,6 @@
 // ==========================================
 // CYBERCITY
-// REAL-TIME WEATHER + AIR QUALITY
+// REAL-TIME + HISTORICAL INTELLIGENCE
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("exploreButton");
 
     if (exploreButton) {
+
         exploreButton.addEventListener("click", function () {
 
             document
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
         });
+
     }
 
 
@@ -95,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ======================================
-    // WEATHER CODE
+    // WEATHER DESCRIPTION
     // ======================================
 
     function getWeatherDescription(code) {
@@ -103,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const weatherCodes = {
 
             0: "Clear sky",
-
             1: "Mainly clear",
             2: "Partly cloudy",
             3: "Overcast",
@@ -139,7 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
             86: "Heavy snow showers",
 
             95: "Thunderstorm",
-
             96: "Thunderstorm with slight hail",
             99: "Thunderstorm with heavy hail"
 
@@ -152,39 +152,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ======================================
-    // AIR QUALITY LEVEL
+    // AQI LEVEL
     // ======================================
 
     function getAQILevel(aqi) {
 
-        if (aqi === null ||
+        if (
+            aqi === null ||
             aqi === undefined ||
-            isNaN(aqi)) {
+            isNaN(aqi)
+        ) {
 
             return "Unavailable";
 
         }
 
+        if (aqi <= 50) return "Good";
 
-        if (aqi <= 50) {
-            return "Good";
-        }
+        if (aqi <= 100) return "Moderate";
 
-        if (aqi <= 100) {
-            return "Moderate";
-        }
-
-        if (aqi <= 150) {
+        if (aqi <= 150)
             return "Unhealthy for sensitive groups";
-        }
 
-        if (aqi <= 200) {
+        if (aqi <= 200)
             return "Unhealthy";
-        }
 
-        if (aqi <= 300) {
+        if (aqi <= 300)
             return "Very Unhealthy";
-        }
 
         return "Hazardous";
 
@@ -192,10 +186,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ======================================
-    // SHOW LOCATION
+    // MAP LOCATION DATA
     // ======================================
 
-    function showLocation(location) {
+    async function showLocation(location) {
 
         document.getElementById(
             "locationName"
@@ -205,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById(
             "locationDescription"
         ).textContent =
-            location.description;
+            "Loading real-time data...";
 
 
         document.getElementById(
@@ -243,39 +237,17 @@ document.addEventListener("DOMContentLoaded", function () {
         ).style.display = "block";
 
 
-        // Get REAL weather + air quality
-
-        fetchRealCityData(
-            location.lat,
-            location.lng
-        );
-
-    }
-
-
-    // ======================================
-    // REAL WEATHER + AIR QUALITY
-    // ======================================
-
-    async function fetchRealCityData(
-        latitude,
-        longitude
-    ) {
-
         try {
 
-            // ==================================
-            // WEATHER API
-            // ==================================
-
             const weatherURL =
+
                 "https://api.open-meteo.com/v1/forecast" +
 
                 "?latitude=" +
-                latitude +
+                location.lat +
 
                 "&longitude=" +
-                longitude +
+                location.lng +
 
                 "&current=" +
 
@@ -289,18 +261,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 "&timezone=auto";
 
 
-            // ==================================
-            // AIR QUALITY API
-            // ==================================
-
             const airURL =
+
                 "https://air-quality-api.open-meteo.com/v1/air-quality" +
 
                 "?latitude=" +
-                latitude +
+                location.lat +
 
                 "&longitude=" +
-                longitude +
+                location.lng +
 
                 "&current=" +
 
@@ -311,278 +280,68 @@ document.addEventListener("DOMContentLoaded", function () {
                 "&timezone=auto";
 
 
-            // ==================================
-            // FETCH BOTH APIs
-            // ==================================
-
             const responses =
                 await Promise.all([
 
                     fetch(weatherURL),
-
                     fetch(airURL)
 
                 ]);
 
 
-            if (!responses[0].ok ||
-                !responses[1].ok) {
-
-                throw new Error(
-                    "API request failed"
-                );
-
-            }
-
-
             const weather =
                 await responses[0].json();
-
 
             const air =
                 await responses[1].json();
 
 
-            // ==================================
-            // WEATHER VALUES
-            // ==================================
-
-            const currentWeather =
+            const w =
                 weather.current;
 
-
-            const temperature =
-                currentWeather.temperature_2m;
-
-
-            const humidity =
-                currentWeather.relative_humidity_2m;
-
-
-            const apparent =
-                currentWeather.apparent_temperature;
-
-
-            const precipitation =
-                currentWeather.precipitation;
-
-
-            const wind =
-                currentWeather.wind_speed_10m;
-
-
-            const weatherCode =
-                currentWeather.weather_code;
-
-
-            const weatherDescription =
-                getWeatherDescription(
-                    weatherCode
-                );
-
-
-            // ==================================
-            // AIR QUALITY VALUES
-            // ==================================
-
-            const currentAir =
+            const a =
                 air.current;
 
-
-            const pm25 =
-                currentAir.pm2_5;
-
-
-            const pm10 =
-                currentAir.pm10;
-
-
-            const aqi =
-                currentAir.us_aqi;
-
-
-            const aqiLevel =
-                getAQILevel(aqi);
-
-
-            // ==================================
-            // AIR QUALITY PANEL
-            // ==================================
 
             document.getElementById(
                 "airData"
             ).textContent =
+                "AQI " +
+                (a.us_aqi ?? "--");
 
-                aqi !== null &&
-                aqi !== undefined
-
-                ? "AQI " + aqi
-
-                : "Unavailable";
-
-
-            // ==================================
-            // WEATHER DESCRIPTION
-            // ==================================
 
             document.getElementById(
                 "locationDescription"
             ).textContent =
 
-                weatherDescription +
+                getWeatherDescription(
+                    w.weather_code
+                ) +
 
                 " • " +
 
-                temperature +
+                w.temperature_2m +
                 "°C • Humidity " +
-                humidity +
+
+                w.relative_humidity_2m +
                 "%";
-
-
-            // ==================================
-            // CONSOLE
-            // ==================================
-
-            console.log(
-                "CYBERCITY REAL-TIME DATA"
-            );
-
-
-            console.log(
-                "Temperature:",
-                temperature,
-                "°C"
-            );
-
-
-            console.log(
-                "Humidity:",
-                humidity,
-                "%"
-            );
-
-
-            console.log(
-                "Feels like:",
-                apparent,
-                "°C"
-            );
-
-
-            console.log(
-                "Precipitation:",
-                precipitation,
-                "mm"
-            );
-
-
-            console.log(
-                "Wind:",
-                wind,
-                "km/h"
-            );
-
-
-            console.log(
-                "Weather:",
-                weatherDescription
-            );
-
-
-            console.log(
-                "PM2.5:",
-                pm25,
-                "µg/m³"
-            );
-
-
-            console.log(
-                "PM10:",
-                pm10,
-                "µg/m³"
-            );
-
-
-            console.log(
-                "US AQI:",
-                aqi
-            );
-
-
-            console.log(
-                "AQI Level:",
-                aqiLevel
-            );
-
-
-            // ==================================
-            // STORE REAL DATA
-            // ==================================
-
-            window.cyberCityLiveData = {
-
-                latitude:
-                    latitude,
-
-                longitude:
-                    longitude,
-
-                temperature:
-                    temperature,
-
-                humidity:
-                    humidity,
-
-                apparentTemperature:
-                    apparent,
-
-                precipitation:
-                    precipitation,
-
-                windSpeed:
-                    wind,
-
-                weather:
-                    weatherDescription,
-
-                pm25:
-                    pm25,
-
-                pm10:
-                    pm10,
-
-                aqi:
-                    aqi,
-
-                aqiLevel:
-                    aqiLevel,
-
-                timestamp:
-                    new Date().toISOString()
-
-            };
 
 
         }
 
         catch (error) {
 
-            console.error(
-                "CyberCity API Error:",
-                error
-            );
-
-
-            document.getElementById(
-                "airData"
-            ).textContent =
-                "Data unavailable";
-
+            console.error(error);
 
             document.getElementById(
                 "locationDescription"
             ).textContent =
-                "Unable to retrieve live data.";
+                "Live data unavailable.";
+
+            document.getElementById(
+                "airData"
+            ).textContent =
+                "Unavailable";
 
         }
 
@@ -590,41 +349,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ======================================
-    // ADD MAP MARKERS
+    // MAP MARKERS
     // ======================================
 
-    locations.forEach(
-        function (location) {
+    locations.forEach(function (location) {
 
-            const marker =
-                L.marker([
-                    location.lat,
-                    location.lng
-                ]).addTo(cityMap);
-
-
-            marker.bindPopup(
-
-                "<b>" +
-                location.name +
-                "</b><br>" +
-
-                "Tap to load real weather & air quality."
-
-            );
+        const marker =
+            L.marker([
+                location.lat,
+                location.lng
+            ]).addTo(cityMap);
 
 
-            marker.on(
-                "click",
-                function () {
+        marker.bindPopup(
 
-                    showLocation(location);
+            "<b>" +
+            location.name +
+            "</b><br>" +
+            "Tap to inspect live data."
 
-                }
-            );
+        );
 
-        }
-    );
+
+        marker.on(
+            "click",
+            function () {
+
+                showLocation(location);
+
+            }
+        );
+
+    });
 
 
     // ======================================
@@ -677,12 +433,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ======================================
-    // GEOCODING
+    // LOCATION SEARCH
     // ======================================
 
-    async function findLocation(
-        searchText
-    ) {
+    async function findLocation(searchText) {
 
         const url =
 
@@ -715,8 +469,10 @@ document.addEventListener("DOMContentLoaded", function () {
             await response.json();
 
 
-        if (!data.results ||
-            data.results.length === 0) {
+        if (
+            !data.results ||
+            data.results.length === 0
+        ) {
 
             throw new Error(
                 "Location not found"
@@ -731,6 +487,644 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ======================================
+    // GET REAL DATA
+    // ======================================
+
+    async function getLiveData(
+        latitude,
+        longitude
+    ) {
+
+        const weatherURL =
+
+            "https://api.open-meteo.com/v1/forecast" +
+
+            "?latitude=" +
+            latitude +
+
+            "&longitude=" +
+            longitude +
+
+            "&current=" +
+
+            "temperature_2m," +
+            "relative_humidity_2m," +
+            "apparent_temperature," +
+            "precipitation," +
+            "weather_code," +
+            "wind_speed_10m" +
+
+            "&timezone=auto";
+
+
+        const airURL =
+
+            "https://air-quality-api.open-meteo.com/v1/air-quality" +
+
+            "?latitude=" +
+            latitude +
+
+            "&longitude=" +
+            longitude +
+
+            "&current=" +
+
+            "pm10," +
+            "pm2_5," +
+            "us_aqi" +
+
+            "&timezone=auto";
+
+
+        const responses =
+            await Promise.all([
+
+                fetch(weatherURL),
+                fetch(airURL)
+
+            ]);
+
+
+        if (
+            !responses[0].ok ||
+            !responses[1].ok
+        ) {
+
+            throw new Error(
+                "Live API unavailable"
+            );
+
+        }
+
+
+        return {
+
+            weather:
+                await responses[0].json(),
+
+            air:
+                await responses[1].json()
+
+        };
+
+    }
+
+
+    // ======================================
+    // HISTORICAL DATA
+    // ======================================
+
+    async function getHistoricalData(
+        latitude,
+        longitude
+    ) {
+
+        // Past 7 days
+        // Uses Open-Meteo archived
+        // past-day model data.
+
+        const weatherURL =
+
+            "https://api.open-meteo.com/v1/forecast" +
+
+            "?latitude=" +
+            latitude +
+
+            "&longitude=" +
+            longitude +
+
+            "&hourly=" +
+
+            "temperature_2m," +
+            "relative_humidity_2m," +
+            "precipitation" +
+
+            "&past_days=7" +
+
+            "&forecast_days=0" +
+
+            "&timezone=auto";
+
+
+        const airURL =
+
+            "https://air-quality-api.open-meteo.com/v1/air-quality" +
+
+            "?latitude=" +
+            latitude +
+
+            "&longitude=" +
+            longitude +
+
+            "&hourly=" +
+
+            "pm2_5," +
+            "pm10," +
+            "us_aqi" +
+
+            "&past_days=7" +
+
+            "&forecast_days=0" +
+
+            "&timezone=auto";
+
+
+        const responses =
+            await Promise.all([
+
+                fetch(weatherURL),
+                fetch(airURL)
+
+            ]);
+
+
+        if (
+            !responses[0].ok ||
+            !responses[1].ok
+        ) {
+
+            throw new Error(
+                "Historical API unavailable"
+            );
+
+        }
+
+
+        return {
+
+            weather:
+                await responses[0].json(),
+
+            air:
+                await responses[1].json()
+
+        };
+
+    }
+
+
+    // ======================================
+    // DAILY AVERAGES
+    // ======================================
+
+    function makeDailyData(
+        weather,
+        air
+    ) {
+
+        const result = [];
+
+
+        for (
+            let day = 0;
+            day < 7;
+            day++
+        ) {
+
+            const start =
+                day * 24;
+
+            const end =
+                start + 24;
+
+
+            const tempValues =
+                weather.hourly.temperature_2m
+                    .slice(start, end)
+                    .filter(
+                        value =>
+                            value !== null
+                    );
+
+
+            const pmValues =
+                air.hourly.pm2_5
+                    .slice(start, end)
+                    .filter(
+                        value =>
+                            value !== null
+                    );
+
+
+            const aqiValues =
+                air.hourly.us_aqi
+                    .slice(start, end)
+                    .filter(
+                        value =>
+                            value !== null
+                    );
+
+
+            const average =
+                function (values) {
+
+                    if (
+                        values.length === 0
+                    ) {
+
+                        return null;
+
+                    }
+
+
+                    const total =
+                        values.reduce(
+                            (
+                                sum,
+                                value
+                            ) =>
+                                sum + value,
+                            0
+                        );
+
+
+                    return (
+                        total /
+                        values.length
+                    );
+
+                };
+
+
+            result.push({
+
+                date:
+                    weather.hourly.time[start]
+                        .split("T")[0],
+
+                temperature:
+                    average(
+                        tempValues
+                    ),
+
+                pm25:
+                    average(
+                        pmValues
+                    ),
+
+                aqi:
+                    average(
+                        aqiValues
+                    )
+
+            });
+
+        }
+
+
+        return result;
+
+    }
+
+
+    // ======================================
+    // DRAW CHART
+    // ======================================
+
+    function drawChart(
+        canvasId,
+        labels,
+        values,
+        title,
+        unit
+    ) {
+
+        const canvas =
+            document.getElementById(
+                canvasId
+            );
+
+
+        if (!canvas) return;
+
+
+        const ctx =
+            canvas.getContext("2d");
+
+
+        const width =
+            canvas.width =
+                canvas.clientWidth *
+                window.devicePixelRatio;
+
+
+        const height =
+            canvas.height =
+                260 *
+                window.devicePixelRatio;
+
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        ctx.scale(
+            window.devicePixelRatio,
+            window.devicePixelRatio
+        );
+
+
+        const W =
+            canvas.clientWidth;
+
+
+        const H = 260;
+
+
+        const cleanValues =
+            values.filter(
+                value =>
+                    value !== null &&
+                    !isNaN(value)
+            );
+
+
+        if (
+            cleanValues.length === 0
+        ) {
+
+            return;
+
+        }
+
+
+        const min =
+            Math.min(...cleanValues);
+
+
+        const max =
+            Math.max(...cleanValues);
+
+
+        const range =
+            max - min || 1;
+
+
+        // Background
+
+        ctx.fillStyle =
+            "#07111f";
+
+        ctx.fillRect(
+            0,
+            0,
+            W,
+            H
+        );
+
+
+        // Title
+
+        ctx.fillStyle =
+            "#ffffff";
+
+        ctx.font =
+            "bold 15px Arial";
+
+        ctx.fillText(
+            title,
+            18,
+            25
+        );
+
+
+        // Unit
+
+        ctx.font =
+            "12px Arial";
+
+        ctx.fillText(
+            unit,
+            W - 55,
+            25
+        );
+
+
+        // Graph area
+
+        const left = 40;
+
+        const right = W - 20;
+
+        const top = 50;
+
+        const bottom = H - 35;
+
+
+        // Grid
+
+        ctx.strokeStyle =
+            "#24354d";
+
+        ctx.lineWidth = 1;
+
+
+        for (
+            let i = 0;
+            i < 4;
+            i++
+        ) {
+
+            const y =
+                top +
+                (
+                    i / 3
+                ) *
+                (
+                    bottom - top
+                );
+
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                left,
+                y
+            );
+
+            ctx.lineTo(
+                right,
+                y
+            );
+
+            ctx.stroke();
+
+        }
+
+
+        // Line
+
+        ctx.beginPath();
+
+
+        values.forEach(
+            function (
+                value,
+                index
+            ) {
+
+                if (
+                    value === null ||
+                    isNaN(value)
+                ) return;
+
+
+                const x =
+                    left +
+                    (
+                        index /
+                        (values.length - 1)
+                    ) *
+                    (
+                        right - left
+                    );
+
+
+                const y =
+                    bottom -
+                    (
+                        (
+                            value - min
+                        ) /
+                        range
+                    ) *
+                    (
+                        bottom - top
+                    );
+
+
+                if (index === 0) {
+
+                    ctx.moveTo(
+                        x,
+                        y
+                    );
+
+                }
+
+                else {
+
+                    ctx.lineTo(
+                        x,
+                        y
+                    );
+
+                }
+
+            }
+        );
+
+
+        ctx.strokeStyle =
+            "#00eaff";
+
+        ctx.lineWidth = 3;
+
+        ctx.stroke();
+
+
+        // Points
+
+        values.forEach(
+            function (
+                value,
+                index
+            ) {
+
+                if (
+                    value === null ||
+                    isNaN(value)
+                ) return;
+
+
+                const x =
+                    left +
+                    (
+                        index /
+                        (values.length - 1)
+                    ) *
+                    (
+                        right - left
+                    );
+
+
+                const y =
+                    bottom -
+                    (
+                        (
+                            value - min
+                        ) /
+                        range
+                    ) *
+                    (
+                        bottom - top
+                    );
+
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    x,
+                    y,
+                    4,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                ctx.fillStyle =
+                    "#ffffff";
+
+                ctx.fill();
+
+
+            }
+        );
+
+
+        // Labels
+
+        ctx.fillStyle =
+            "#8fa4bf";
+
+        ctx.font =
+            "10px Arial";
+
+
+        labels.forEach(
+            function (
+                label,
+                index
+            ) {
+
+                const x =
+                    left +
+                    (
+                        index /
+                        (labels.length - 1)
+                    ) *
+                    (
+                        right - left
+                    );
+
+
+                ctx.fillText(
+                    label,
+                    x - 18,
+                    H - 12
+                );
+
+            }
+        );
+
+    }
+
+
+    // ======================================
     // ANALYZE STREET
     // ======================================
 
@@ -739,8 +1133,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const street =
             streetSearch.value.trim();
 
-
-        // EMPTY SEARCH
 
         if (street === "") {
 
@@ -769,7 +1161,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        // ==================================
         // LOADING
+        // ==================================
 
         analysisResult.innerHTML = `
 
@@ -780,12 +1174,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
 
                 <h3>
-                    Fetching Live Data...
+                    Fetching City Intelligence...
                 </h3>
 
                 <p>
-                    Connecting to real weather
-                    and air-quality services.
+                    Connecting to real-time and
+                    historical data services.
                 </p>
 
             </div>
@@ -796,7 +1190,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
 
             // ==================================
-            // FIND REAL LOCATION
+            // FIND LOCATION
             // ==================================
 
             const location =
@@ -814,146 +1208,55 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             // ==================================
-            // WEATHER
+            // LIVE DATA
             // ==================================
 
-            const weatherURL =
-
-                "https://api.open-meteo.com/v1/forecast" +
-
-                "?latitude=" +
-                latitude +
-
-                "&longitude=" +
-                longitude +
-
-                "&current=" +
-
-                "temperature_2m," +
-                "relative_humidity_2m," +
-                "apparent_temperature," +
-                "precipitation," +
-                "weather_code," +
-                "wind_speed_10m" +
-
-                "&timezone=auto";
-
-
-            // ==================================
-            // AIR QUALITY
-            // ==================================
-
-            const airURL =
-
-                "https://air-quality-api.open-meteo.com/v1/air-quality" +
-
-                "?latitude=" +
-                latitude +
-
-                "&longitude=" +
-                longitude +
-
-                "&current=" +
-
-                "pm10," +
-                "pm2_5," +
-                "us_aqi" +
-
-                "&timezone=auto";
-
-
-            // ==================================
-            // FETCH LIVE DATA
-            // ==================================
-
-            const responses =
-                await Promise.all([
-
-                    fetch(weatherURL),
-
-                    fetch(airURL)
-
-                ]);
-
-
-            if (!responses[0].ok ||
-                !responses[1].ok) {
-
-                throw new Error(
-                    "Live API unavailable"
+            const live =
+                await getLiveData(
+                    latitude,
+                    longitude
                 );
 
-            }
-
-
-            const weather =
-                await responses[0].json();
-
-
-            const air =
-                await responses[1].json();
-
-
-            // ==================================
-            // WEATHER
-            // ==================================
 
             const w =
-                weather.current;
+                live.weather.current;
 
 
-            const temperature =
-                w.temperature_2m;
+            const a =
+                live.air.current;
 
 
-            const humidity =
-                w.relative_humidity_2m;
+            // ==================================
+            // HISTORICAL DATA
+            // ==================================
+
+            const historical =
+                await getHistoricalData(
+                    latitude,
+                    longitude
+                );
 
 
-            const apparent =
-                w.apparent_temperature;
-
-
-            const precipitation =
-                w.precipitation;
-
-
-            const wind =
-                w.wind_speed_10m;
-
-
-            const weatherDescription =
-                getWeatherDescription(
-                    w.weather_code
+            const daily =
+                makeDailyData(
+                    historical.weather,
+                    historical.air
                 );
 
 
             // ==================================
-            // AIR QUALITY
+            // DATE LABELS
             // ==================================
 
-            const a =
-                air.current;
-
-
-            const pm25 =
-                a.pm2_5;
-
-
-            const pm10 =
-                a.pm10;
-
-
-            const aqi =
-                a.us_aqi;
-
-
-            const aqiLevel =
-                getAQILevel(aqi);
+            const labels =
+                daily.map(
+                    item =>
+                        item.date.slice(5)
+                );
 
 
             // ==================================
-            // RESULT
+            // DISPLAY
             // ==================================
 
             analysisResult.innerHTML = `
@@ -963,7 +1266,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div>
 
                         <span class="analysis-label">
-                            🌐 LIVE DATA
+                            🌐 LIVE + HISTORICAL DATA
                         </span>
 
                         <h3>
@@ -980,11 +1283,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="health-score">
 
                         <span>
-                            US AQI
+                            LIVE AQI
                         </span>
 
                         <strong>
-                            ${aqi ?? "--"}
+                            ${a.us_aqi ?? "--"}
                         </strong>
 
                     </div>
@@ -994,15 +1297,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <div class="analysis-grid">
 
-
                     <div class="analysis-card">
 
                         <span>
-                            🌡️ Temperature
+                            🌡️ Current Temperature
                         </span>
 
                         <strong>
-                            ${temperature}°C
+                            ${w.temperature_2m}°C
                         </strong>
 
                     </div>
@@ -1011,11 +1313,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="analysis-card">
 
                         <span>
-                            🌦️ Conditions
+                            🌦️ Current Conditions
                         </span>
 
                         <strong>
-                            ${weatherDescription}
+                            ${getWeatherDescription(
+                                w.weather_code
+                            )}
                         </strong>
 
                     </div>
@@ -1028,7 +1332,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         </span>
 
                         <strong>
-                            ${humidity}%
+                            ${w.relative_humidity_2m}%
                         </strong>
 
                     </div>
@@ -1037,11 +1341,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="analysis-card">
 
                         <span>
-                            🌬️ Wind
+                            🫁 Live PM2.5
                         </span>
 
                         <strong>
-                            ${wind} km/h
+                            ${a.pm2_5 ?? "--"} µg/m³
                         </strong>
 
                     </div>
@@ -1050,37 +1354,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="analysis-card">
 
                         <span>
-                            🌧️ Precipitation
+                            🌫️ Live PM10
                         </span>
 
                         <strong>
-                            ${precipitation} mm
-                        </strong>
-
-                    </div>
-
-
-                    <div class="analysis-card">
-
-                        <span>
-                            🫁 PM2.5
-                        </span>
-
-                        <strong>
-                            ${pm25 ?? "--"} µg/m³
-                        </strong>
-
-                    </div>
-
-
-                    <div class="analysis-card">
-
-                        <span>
-                            🌫️ PM10
-                        </span>
-
-                        <strong>
-                            ${pm10 ?? "--"} µg/m³
+                            ${a.pm10 ?? "--"} µg/m³
                         </strong>
 
                     </div>
@@ -1093,11 +1371,109 @@ document.addEventListener("DOMContentLoaded", function () {
                         </span>
 
                         <strong>
-                            ${aqiLevel}
+                            ${getAQILevel(
+                                a.us_aqi
+                            )}
                         </strong>
 
                     </div>
 
+                </div>
+
+
+                <div class="historical-section">
+
+                    <div class="historical-title">
+
+                        <span>
+                            📊 HISTORICAL INTELLIGENCE
+                        </span>
+
+                        <h3>
+                            Previous 7 Days
+                        </h3>
+
+                        <p>
+                            Real API data aggregated
+                            into daily averages.
+                        </p>
+
+                    </div>
+
+
+                    <div class="chart-container">
+
+                        <canvas
+                            id="temperatureChart">
+                        </canvas>
+
+                    </div>
+
+
+                    <div class="chart-container">
+
+                        <canvas
+                            id="aqiChart">
+                        </canvas>
+
+                    </div>
+
+
+                    <div class="historical-table">
+
+                        <h3>
+                            📅 Historical Data
+                        </h3>
+
+                        <div class="history-row history-head">
+
+                            <span>Date</span>
+                            <span>Temp</span>
+                            <span>PM2.5</span>
+                            <span>AQI</span>
+
+                        </div>
+
+
+                        ${daily.map(
+                            item => `
+
+                                <div class="history-row">
+
+                                    <span>
+                                        ${item.date}
+                                    </span>
+
+                                    <span>
+                                        ${
+                                            item.temperature !== null
+                                            ? item.temperature.toFixed(1) + "°C"
+                                            : "--"
+                                        }
+                                    </span>
+
+                                    <span>
+                                        ${
+                                            item.pm25 !== null
+                                            ? item.pm25.toFixed(1)
+                                            : "--"
+                                        }
+                                    </span>
+
+                                    <span>
+                                        ${
+                                            item.aqi !== null
+                                            ? item.aqi.toFixed(0)
+                                            : "--"
+                                        }
+                                    </span>
+
+                                </div>
+
+                            `
+                        ).join("")}
+
+                    </div>
 
                 </div>
 
@@ -1105,19 +1481,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="ai-insight">
 
                     <span>
-                        🧠 CYBERCITY LIVE INSIGHT
+                        🧠 CYBERCITY TREND ANALYSIS
                     </span>
 
                     <p>
 
-                        ${weatherDescription}.
-                        Current temperature is
-                        ${temperature}°C with
-                        ${humidity}% humidity.
-                        The reported US AQI is
-                        ${aqi ?? "unavailable"},
-                        classified as
-                        ${aqiLevel}.
+                        Historical data has been
+                        retrieved for
+                        <strong>
+                            ${location.name}
+                        </strong>.
+                        The dashboard is now able
+                        to compare recent conditions
+                        instead of showing a single
+                        snapshot.
 
                     </p>
 
@@ -1126,9 +1503,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <div class="data-note">
 
-                    LIVE DATA •
-                    Open-Meteo Weather API +
-                    Open-Meteo Air Quality API •
+                    REAL API DATA •
+                    Open-Meteo Weather +
+                    Open-Meteo Air Quality •
                     ${new Date().toLocaleString()}
 
                 </div>
@@ -1137,10 +1514,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             // ==================================
-            // STORE LIVE DATA
+            // DRAW TEMPERATURE
             // ==================================
 
-            window.cyberCityLiveData = {
+            drawChart(
+
+                "temperatureChart",
+
+                labels,
+
+                daily.map(
+                    item =>
+                        item.temperature
+                ),
+
+                "🌡️ Temperature — 7 Days",
+
+                "°C"
+
+            );
+
+
+            // ==================================
+            // DRAW AQI
+            // ==================================
+
+            drawChart(
+
+                "aqiChart",
+
+                labels,
+
+                daily.map(
+                    item =>
+                        item.aqi
+                ),
+
+                "🌫️ Air Quality — 7 Days",
+
+                "AQI"
+
+            );
+
+
+            // ==================================
+            // MOVE MAP
+            // ==================================
+
+            cityMap.setView(
+                [latitude, longitude],
+                14
+            );
+
+
+            // ==================================
+            // SAVE DATA
+            // ==================================
+
+            window.cyberCityHistoricalData = {
 
                 location:
                     location.name,
@@ -1154,49 +1585,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 longitude:
                     longitude,
 
-                temperature:
-                    temperature,
+                live:
+                    live,
 
-                humidity:
-                    humidity,
+                historical:
+                    daily,
 
-                apparentTemperature:
-                    apparent,
-
-                precipitation:
-                    precipitation,
-
-                windSpeed:
-                    wind,
-
-                weather:
-                    weatherDescription,
-
-                pm25:
-                    pm25,
-
-                pm10:
-                    pm10,
-
-                aqi:
-                    aqi,
-
-                aqiLevel:
-                    aqiLevel,
-
-                timestamp:
+                retrievedAt:
                     new Date().toISOString()
 
             };
 
 
-            // ==================================
-            // MOVE MAP TO LOCATION
-            // ==================================
-
-            cityMap.setView(
-                [latitude, longitude],
-                14
+            console.log(
+                "CyberCity historical data:",
+                window.cyberCityHistoricalData
             );
 
 
@@ -1205,6 +1608,7 @@ document.addEventListener("DOMContentLoaded", function () {
         catch (error) {
 
             console.error(
+                "CyberCity error:",
                 error
             );
 
@@ -1222,9 +1626,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     </h3>
 
                     <p>
-                        We could not find that location
-                        or retrieve live data.
-                        Try a city or well-known area.
+                        We could not retrieve the
+                        historical data. Try again
+                        with a city such as Bengaluru.
                     </p>
 
                 </div>
@@ -1237,7 +1641,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ======================================
-    // ANALYZE BUTTON
+    // BUTTON
     // ======================================
 
     if (analyzeButton) {
