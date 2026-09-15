@@ -1589,3 +1589,67 @@ footer {
         height: 50px !important;
     }
 }
+/* ===== CYBERCITY SEARCH BAR HARD FIX ===== */
+
+.street-intelligence .search-area {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    gap: 12px !important;
+    overflow: visible !important;
+}
+
+.street-intelligence .search-area input#streetSearch {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: 52px !important;
+    min-height: 52px !important;
+    flex: none !important;
+    box-sizing: border-box !important;
+
+    background: #030914 !important;
+    color: #ffffff !important;
+
+    border: 1px solid #00eaff !important;
+    border-radius: 10px !important;
+
+    padding: 0 16px !important;
+    margin: 0 !important;
+
+    font-size: 16px !important;
+    line-height: 52px !important;
+    outline: none !important;
+}
+
+.street-intelligence .search-area input#streetSearch::placeholder {
+    color: #8293aa !important;
+    opacity: 1 !important;
+}
+
+.street-intelligence .search-area button#analyzeButton {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: 52px !important;
+    min-height: 52px !important;
+    flex: none !important;
+    box-sizing: border-box !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background: #00eaff !important;
+    color: #001018 !important;
+
+    border: none !important;
+    border-radius: 10px !important;
+
+    font-size: 15px !important;
+    font-weight: 800 !important;
+}
