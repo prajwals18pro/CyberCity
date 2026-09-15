@@ -1682,8 +1682,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function updateSmartAlerts() {
 
-    const tempElement = document.getElementById("currentTemp");
-    const pm25Element = document.getElementById("pm25");
+    const text = document.body.innerText;
+
+    /* Find PM2.5 value */
+    const pmMatch = text.match(/PM2\.5\s*[:\-]?\s*([\d.]+)/i);
+
+    /* Find temperature value */
+    const tempMatch = text.match(/(?:Current Temperature|Temperature)\s*[:\-]?\s*([\d.]+)/i);
+
+    if (!pmMatch && !tempMatch) {
+        return;
+    }
+
+    const pm25 = pmMatch ? parseFloat(pmMatch[1]) : null;
+    const temperature = tempMatch ? parseFloat(tempMatch[1]) : null;
 
     const airAlert = document.getElementById("airAlert");
     const airAlertText = document.getElementById("airAlertText");
@@ -1695,53 +1707,51 @@ function updateSmartAlerts() {
     const alertTitle = document.getElementById("alertTitle");
     const alertMessage = document.getElementById("alertMessage");
 
-    if (!tempElement || !pm25Element) return;
+    if (!airAlert || !tempAlert) return;
 
-    const temperature = parseFloat(
-        tempElement.textContent.replace(/[^\d.-]/g, "")
-    );
-
-    const pm25 = parseFloat(
-        pm25Element.textContent.replace(/[^\d.-]/g, "")
-    );
-
-    if (isNaN(temperature) || isNaN(pm25)) return;
-
-    /* AIR QUALITY */
+    /* ================= AIR QUALITY ================= */
 
     let airLevel = "GOOD";
     let airText = "Air quality is within a healthy range.";
 
-    if (pm25 > 35) {
-        airLevel = "CRITICAL";
-        airText = "High PM2.5 detected. Immediate attention recommended.";
-    } 
-    else if (pm25 > 25) {
-        airLevel = "WARNING";
-        airText = "PM2.5 levels are elevated. Monitor air quality.";
+    if (pm25 !== null) {
+
+        if (pm25 > 35) {
+            airLevel = "CRITICAL";
+            airText = "High PM2.5 detected. Immediate attention recommended.";
+        }
+        else if (pm25 > 25) {
+            airLevel = "WARNING";
+            airText = "PM2.5 levels are elevated. Monitor air quality.";
+        }
     }
 
     airAlert.textContent = airLevel;
     airAlertText.textContent = airText;
 
-    /* TEMPERATURE */
+
+    /* ================= TEMPERATURE ================= */
 
     let tempLevel = "NORMAL";
     let tempText = "Temperature conditions are stable.";
 
-    if (temperature >= 35) {
-        tempLevel = "CRITICAL";
-        tempText = "Extreme heat detected.";
-    } 
-    else if (temperature >= 30) {
-        tempLevel = "WARNING";
-        tempText = "High temperature detected.";
+    if (temperature !== null) {
+
+        if (temperature >= 35) {
+            tempLevel = "CRITICAL";
+            tempText = "Extreme heat detected.";
+        }
+        else if (temperature >= 30) {
+            tempLevel = "WARNING";
+            tempText = "High temperature detected.";
+        }
     }
 
     tempAlert.textContent = tempLevel;
     tempAlertText.textContent = tempText;
 
-    /* OVERALL CITY STATUS */
+
+    /* ================= CITY STATUS ================= */
 
     if (airLevel === "CRITICAL" || tempLevel === "CRITICAL") {
 
@@ -1750,7 +1760,7 @@ function updateSmartAlerts() {
         alertMessage.textContent =
             "Critical environmental conditions detected.";
 
-    } 
+    }
     else if (airLevel === "WARNING" || tempLevel === "WARNING") {
 
         alertIcon.textContent = "🟡";
@@ -1758,7 +1768,7 @@ function updateSmartAlerts() {
         alertMessage.textContent =
             "Some environmental conditions require attention.";
 
-    } 
+    }
     else {
 
         alertIcon.textContent = "🟢";
@@ -1768,8 +1778,6 @@ function updateSmartAlerts() {
     }
 }
 
-/* Run after live data loads */
-setTimeout(updateSmartAlerts, 2500);
 
-/* Continue monitoring */
-setInterval(updateSmartAlerts, 30000);
+/* Check repeatedly until live data appears */
+setInterval(updateSmartAlerts, 3000);
