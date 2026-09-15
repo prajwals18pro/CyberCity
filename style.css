@@ -1496,3 +1496,96 @@ footer {
         height: 50px !important;
     }
 }
+/* ===== STREET INTELLIGENCE SEARCH - FINAL FIX ===== */
+
+.street-intelligence {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.street-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 24px !important;
+}
+
+.search-area {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 10px !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+}
+
+.search-area #streetSearch {
+    display: block !important;
+    flex: 1 1 0% !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 50px !important;
+    box-sizing: border-box !important;
+    padding: 0 15px !important;
+    border: 1px solid #00eaff !important;
+    border-radius: 10px !important;
+    background: #030914 !important;
+    color: white !important;
+    font-size: 15px !important;
+}
+
+.search-area #streetSearch::placeholder {
+    color: #7d8da3 !important;
+    opacity: 1 !important;
+}
+
+.search-area #analyzeButton {
+    display: block !important;
+    flex: 0 0 115px !important;
+    width: 115px !important;
+    min-width: 115px !important;
+    max-width: 115px !important;
+    height: 50px !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    background: #00eaff !important;
+    color: #001018 !important;
+    font-weight: 800 !important;
+    font-size: 14px !important;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 600px) {
+
+    .street-box {
+        padding: 18px !important;
+    }
+
+    .search-area {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 12px !important;
+    }
+
+    .search-area #streetSearch {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        flex: none !important;
+        height: 50px !important;
+    }
+
+    .search-area #analyzeButton {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        flex: none !important;
+        height: 50px !important;
+    }
+}
