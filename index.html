@@ -1,4 +1,4 @@
-               <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,9 +21,7 @@
 
 <body>
 
-    <!-- ==========================================
-         NAVIGATION
-    =========================================== -->
+    <!-- NAVBAR -->
 
     <header class="navbar">
 
@@ -42,9 +40,7 @@
     </header>
 
 
-    <!-- ==========================================
-         HERO
-    =========================================== -->
+    <!-- HERO -->
 
     <main>
 
@@ -75,7 +71,8 @@
                 </p>
 
                 <button class="explore-btn"
-                        onclick="exploreCity()">
+                        id="exploreButton"
+                        type="button">
 
                     Explore City →
 
@@ -86,9 +83,7 @@
         </section>
 
 
-        <!-- ==========================================
-             CITY DASHBOARD
-        =========================================== -->
+        <!-- CITY DASHBOARD -->
 
         <section class="dashboard"
                  id="city-dashboard">
@@ -112,364 +107,209 @@
             </div>
 
 
-            <!-- ==========================================
-                 15 SMART CITY SYSTEMS
-            =========================================== -->
+            <!-- 15 SYSTEMS -->
 
             <div class="cards">
 
 
-                <!-- TRAFFIC -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        🚦
-                    </div>
+                    <div class="icon">🚦</div>
 
-                    <h3>
-                        Traffic
-                    </h3>
+                    <h3>Traffic</h3>
 
-                    <p>
-                        Road congestion
-                    </p>
+                    <p>Road congestion</p>
 
-                    <strong>
-                        LIVE
-                    </strong>
+                    <strong>LIVE</strong>
 
                 </div>
 
 
-                <!-- AIR QUALITY -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        🌫️
-                    </div>
+                    <div class="icon">🌫️</div>
 
-                    <h3>
-                        Air Quality
-                    </h3>
+                    <h3>Air Quality</h3>
 
-                    <p>
-                        Pollution monitoring
-                    </p>
+                    <p>Pollution monitoring</p>
 
-                    <strong>
-                        LIVE
-                    </strong>
+                    <strong>LIVE</strong>
 
                 </div>
 
 
-                <!-- WATER -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        💧
-                    </div>
+                    <div class="icon">💧</div>
 
-                    <h3>
-                        Water
-                    </h3>
+                    <h3>Water</h3>
 
-                    <p>
-                        Water infrastructure
-                    </p>
+                    <p>Water infrastructure</p>
 
-                    <strong>
-                        ONLINE
-                    </strong>
+                    <strong>ONLINE</strong>
 
                 </div>
 
 
-                <!-- ENERGY -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        ⚡
-                    </div>
+                    <div class="icon">⚡</div>
 
-                    <h3>
-                        Energy
-                    </h3>
+                    <h3>Energy</h3>
 
-                    <p>
-                        Power consumption
-                    </p>
+                    <p>Power consumption</p>
 
-                    <strong>
-                        LIVE
-                    </strong>
+                    <strong>LIVE</strong>
 
                 </div>
 
 
-                <!-- WASTE -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        🗑️
-                    </div>
+                    <div class="icon">🗑️</div>
 
-                    <h3>
-                        Waste
-                    </h3>
+                    <h3>Waste</h3>
 
-                    <p>
-                        Waste management
-                    </p>
+                    <p>Waste management</p>
 
-                    <strong>
-                        MONITORING
-                    </strong>
+                    <strong>MONITORING</strong>
 
                 </div>
 
 
-                <!-- STREET LIGHTING -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        💡
-                    </div>
+                    <div class="icon">💡</div>
 
-                    <h3>
-                        Street Lighting
-                    </h3>
+                    <h3>Street Lighting</h3>
 
-                    <p>
-                        Smart lighting network
-                    </p>
+                    <p>Smart lighting network</p>
 
-                    <strong>
-                        ONLINE
-                    </strong>
+                    <strong>ONLINE</strong>
 
                 </div>
 
 
-                <!-- EMERGENCY -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        🚨
-                    </div>
+                    <div class="icon">🚨</div>
 
-                    <h3>
-                        Emergency
-                    </h3>
+                    <h3>Emergency</h3>
 
-                    <p>
-                        Safety monitoring
-                    </p>
+                    <p>Safety monitoring</p>
 
-                    <strong>
-                        ACTIVE
-                    </strong>
+                    <strong>ACTIVE</strong>
 
                 </div>
 
 
-                <!-- PARKING -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        🅿️
-                    </div>
+                    <div class="icon">🅿️</div>
 
-                    <h3>
-                        Parking
-                    </h3>
+                    <h3>Parking</h3>
 
-                    <p>
-                        Parking availability
-                    </p>
+                    <p>Parking availability</p>
 
-                    <strong>
-                        LIVE
-                    </strong>
+                    <strong>LIVE</strong>
 
                 </div>
 
 
-                <!-- PUBLIC TRANSPORT -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        🚌
-                    </div>
+                    <div class="icon">🚌</div>
 
-                    <h3>
-                        Public Transport
-                    </h3>
+                    <h3>Public Transport</h3>
 
-                    <p>
-                        Transit monitoring
-                    </p>
+                    <p>Transit monitoring</p>
 
-                    <strong>
-                        LIVE
-                    </strong>
+                    <strong>LIVE</strong>
 
                 </div>
 
 
-                <!-- WEATHER -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        🌧️
-                    </div>
+                    <div class="icon">🌧️</div>
 
-                    <h3>
-                        Weather
-                    </h3>
+                    <h3>Weather</h3>
 
-                    <p>
-                        Weather conditions
-                    </p>
+                    <p>Weather conditions</p>
 
-                    <strong>
-                        LIVE
-                    </strong>
+                    <strong>LIVE</strong>
 
                 </div>
 
 
-                <!-- IOT -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        📡
-                    </div>
+                    <div class="icon">📡</div>
 
-                    <h3>
-                        IoT Sensors
-                    </h3>
+                    <h3>IoT Sensors</h3>
 
-                    <p>
-                        Connected devices
-                    </p>
+                    <p>Connected devices</p>
 
-                    <strong>
-                        1,248 ACTIVE
-                    </strong>
+                    <strong>1,248 ACTIVE</strong>
 
                 </div>
 
 
-                <!-- HEALTHCARE -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        🏥
-                    </div>
+                    <div class="icon">🏥</div>
 
-                    <h3>
-                        Healthcare
-                    </h3>
+                    <h3>Healthcare</h3>
 
-                    <p>
-                        Healthcare infrastructure
-                    </p>
+                    <p>Healthcare infrastructure</p>
 
-                    <strong>
-                        MONITORING
-                    </strong>
+                    <strong>MONITORING</strong>
 
                 </div>
 
 
-                <!-- EDUCATION -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        🏫
-                    </div>
+                    <div class="icon">🏫</div>
 
-                    <h3>
-                        Education
-                    </h3>
+                    <h3>Education</h3>
 
-                    <p>
-                        Education facilities
-                    </p>
+                    <p>Education facilities</p>
 
-                    <strong>
-                        ONLINE
-                    </strong>
+                    <strong>ONLINE</strong>
 
                 </div>
 
 
-                <!-- GREEN SPACES -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        🌳
-                    </div>
+                    <div class="icon">🌳</div>
 
-                    <h3>
-                        Green Spaces
-                    </h3>
+                    <h3>Green Spaces</h3>
 
-                    <p>
-                        Urban environment
-                    </p>
+                    <p>Urban environment</p>
 
-                    <strong>
-                        MONITORING
-                    </strong>
+                    <strong>MONITORING</strong>
 
                 </div>
 
 
-                <!-- CITY ANALYTICS -->
-
                 <div class="card city-card">
 
-                    <div class="icon">
-                        📊
-                    </div>
+                    <div class="icon">📊</div>
 
-                    <h3>
-                        City Analytics
-                    </h3>
+                    <h3>City Analytics</h3>
 
-                    <p>
-                        Urban intelligence
-                    </p>
+                    <p>Urban intelligence</p>
 
-                    <strong>
-                        ANALYZING
-                    </strong>
+                    <strong>ANALYZING</strong>
 
                 </div>
-
 
             </div>
 
 
-            <!-- ==========================================
-                 INTERACTIVE MAP
-            =========================================== -->
+            <!-- INTERACTIVE MAP -->
 
             <div class="map-section">
 
@@ -507,13 +347,8 @@
 
                 <div class="map-container">
 
-
-                    <!-- MAP -->
-
                     <div id="cityMap"></div>
 
-
-                    <!-- LOCATION PANEL -->
 
                     <div class="location-panel"
                          id="locationPanel">
@@ -525,8 +360,11 @@
                                 📍 SELECTED LOCATION
                             </span>
 
-                            <button onclick="closeLocation()">
+                            <button id="closeLocation"
+                                    type="button">
+
                                 ×
+
                             </button>
 
                         </div>
@@ -550,9 +388,7 @@
 
                             <div>
 
-                                <span>
-                                    🚦 Traffic
-                                </span>
+                                <span>🚦 Traffic</span>
 
                                 <strong id="trafficData">
                                     --
@@ -563,9 +399,7 @@
 
                             <div>
 
-                                <span>
-                                    🌫️ Air Quality
-                                </span>
+                                <span>🌫️ Air Quality</span>
 
                                 <strong id="airData">
                                     --
@@ -576,9 +410,7 @@
 
                             <div>
 
-                                <span>
-                                    💧 Water
-                                </span>
+                                <span>💧 Water</span>
 
                                 <strong id="waterData">
                                     --
@@ -589,9 +421,7 @@
 
                             <div>
 
-                                <span>
-                                    ⚡ Energy
-                                </span>
+                                <span>⚡ Energy</span>
 
                                 <strong id="energyData">
                                     --
@@ -602,9 +432,7 @@
 
                             <div>
 
-                                <span>
-                                    💡 Lighting
-                                </span>
+                                <span>💡 Lighting</span>
 
                                 <strong id="lightData">
                                     --
@@ -615,9 +443,7 @@
 
                             <div>
 
-                                <span>
-                                    🅿️ Parking
-                                </span>
+                                <span>🅿️ Parking</span>
 
                                 <strong id="parkingData">
                                     --
@@ -635,9 +461,9 @@
             </div>
 
 
-            <!-- ==========================================
-                 STEP 5 — STREET INTELLIGENCE
-            =========================================== -->
+            <!-- =====================================
+                 STREET INTELLIGENCE
+            ====================================== -->
 
             <section class="street-intelligence">
 
@@ -653,42 +479,40 @@
                     </h2>
 
                     <p>
-                        Select an area to generate a detailed
-                        smart-city intelligence report.
+                        Enter a street or area to generate
+                        a smart-city intelligence report.
                     </p>
 
                 </div>
 
-
-                <!-- SEARCH BOX -->
 
                 <div class="street-box">
 
 
                     <div class="search-area">
 
-
                         <input
                             type="text"
                             id="streetSearch"
                             placeholder="Enter street or area..."
+                            autocomplete="off"
                         >
 
 
-                        <button onclick="analyzeStreet()">
+                        <button
+                            id="analyzeButton"
+                            type="button">
 
                             🔎 Analyze
 
                         </button>
 
-
                     </div>
 
 
-                    <!-- ANALYSIS RESULT -->
-
-                    <div class="analysis-result"
-                         id="analysisResult">
+                    <div
+                        class="analysis-result"
+                        id="analysisResult">
 
 
                         <div class="result-placeholder">
@@ -697,11 +521,9 @@
                                 📍
                             </div>
 
-
                             <h3>
                                 Ready for Analysis
                             </h3>
-
 
                             <p>
                                 Enter a street or area above
@@ -713,9 +535,7 @@
 
                     </div>
 
-
                 </div>
-
 
             </section>
 
@@ -725,38 +545,30 @@
     </main>
 
 
-    <!-- ==========================================
-         FOOTER
-    =========================================== -->
+    <!-- FOOTER -->
 
     <footer>
 
         <p>
-
             CyberCity © 2026 |
             Intelligent Urban Analytics
-
         </p>
 
     </footer>
 
 
-    <!-- ==========================================
-         LEAFLET JAVASCRIPT
-    =========================================== -->
+    <!-- LEAFLET -->
 
     <script
         src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
     </script>
 
 
-    <!-- ==========================================
-         CYBERCITY JAVASCRIPT
-    =========================================== -->
+    <!-- CYBERCITY SCRIPT -->
 
     <script src="script.js"></script>
 
 
 </body>
 
-</html>     
+</html>
