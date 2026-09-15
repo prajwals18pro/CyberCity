@@ -1799,3 +1799,169 @@ footer {
         min-height: 135px;
     }
 }
+/* =========================================
+   CYBERCITY COMMAND CENTER
+   ========================================= */
+
+.command-center {
+    width: 100%;
+    max-width: 1200px;
+    margin: 70px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.command-center .section-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.command-center .section-tag {
+    color: #00eaff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.command-center h2 {
+    color: #ffffff;
+    font-size: 32px;
+    margin: 8px 0;
+}
+
+.command-center .section-heading p {
+    color: #8293aa;
+}
+
+/* MAIN STATUS */
+
+.command-status {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 22px;
+    margin-bottom: 20px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(0,234,255,0.08),
+        rgba(0,255,157,0.04)
+    );
+
+    border: 1px solid rgba(0,234,255,0.35);
+    border-radius: 16px;
+
+    box-shadow: 0 0 25px rgba(0,234,255,0.08);
+}
+
+.status-light {
+    font-size: 35px;
+}
+
+.command-status span {
+    display: block;
+    color: #8293aa;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.command-status strong {
+    display: block;
+    margin-top: 5px;
+    color: #00ff9d;
+    font-size: 15px;
+}
+
+/* COMMAND CARDS */
+
+.command-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.command-card {
+    min-height: 140px;
+    padding: 22px;
+
+    background: rgba(5,13,25,0.92);
+
+    border: 1px solid rgba(0,234,255,0.18);
+    border-radius: 16px;
+
+    box-sizing: border-box;
+    transition: 0.3s ease;
+}
+
+.command-card:hover {
+    transform: translateY(-5px);
+    border-color: #00eaff;
+    box-shadow: 0 0 25px rgba(0,234,255,0.12);
+}
+
+.command-card span {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 14px;
+}
+
+.command-card small {
+    display: block;
+    color: #71849c;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.command-card strong {
+    display: block;
+    margin-top: 7px;
+    color: #00eaff;
+    font-size: 14px;
+}
+
+/* FOOTER */
+
+.command-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+    padding: 14px 18px;
+
+    background: #030914;
+    border: 1px solid rgba(0,234,255,0.15);
+    border-radius: 10px;
+
+    color: #00ff9d;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .command-center {
+        margin: 50px auto;
+        padding: 0 15px;
+    }
+
+    .command-center h2 {
+        font-size: 26px;
+    }
+
+    .command-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .command-status {
+        padding: 18px;
+    }
+
+    .command-footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
