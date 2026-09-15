@@ -1781,3 +1781,35 @@ function updateSmartAlerts() {
 
 /* Check repeatedly until live data appears */
 setInterval(updateSmartAlerts, 3000);
+/* =========================================
+   COMMAND CENTER LIVE DATA
+   ========================================= */
+
+function updateCommandCenter() {
+
+    const commandTemp = document.getElementById("commandTemperature");
+    const commandAQI = document.getElementById("commandAQI");
+
+    if (!commandTemp || !commandAQI) return;
+
+    /* Find current temperature already displayed on the page */
+    const tempMatch = document.body.innerText.match(
+        /Current Temperature\s*([\d.]+)\s*°?C/i
+    );
+
+    /* Find AQI already displayed on the page */
+    const aqiMatch = document.body.innerText.match(
+        /LIVE AQI\s*(\d+)/i
+    );
+
+    if (tempMatch) {
+        commandTemp.textContent = tempMatch[1] + "°C";
+    }
+
+    if (aqiMatch) {
+        commandAQI.textContent = "AQI " + aqiMatch[1];
+    }
+}
+
+/* Keep Command Center synchronized */
+setInterval(updateCommandCenter, 3000);
