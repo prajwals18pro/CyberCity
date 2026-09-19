@@ -1813,6 +1813,64 @@ function updateCommandCenter() {
 
 /* Keep Command Center synchronized */
 setInterval(updateCommandCenter, 3000);
+// =============================
+// CYBERCITY DEMO MODE
+// =============================
+
+setTimeout(function () {
+
+    var button = document.createElement("button");
+
+    button.innerHTML = "▶ DEMO MODE";
+
+    button.style.position = "fixed";
+    button.style.bottom = "20px";
+    button.style.right = "20px";
+    button.style.zIndex = "99999";
+    button.style.padding = "15px 20px";
+    button.style.background = "#00e5ff";
+    button.style.color = "#000";
+    button.style.border = "0";
+    button.style.borderRadius = "10px";
+    button.style.fontWeight = "bold";
+    button.style.fontSize = "15px";
+
+    document.body.appendChild(button);
+
+    button.onclick = function () {
+
+        var steps = [
+            "🏙️ Starting CyberCity...",
+            "🚦 Checking Traffic...",
+            "🌫️ Checking Air Quality...",
+            "💧 Checking Water...",
+            "⚡ Checking Energy...",
+            "🅿️ Checking Parking...",
+            "🛡️ Security Scan...",
+            "✅ CITY SYSTEMS NORMAL"
+        ];
+
+        var i = 0;
+
+        button.innerHTML = steps[i];
+
+        var timer = setInterval(function () {
+
+            i++;
+
+            if (i >= steps.length) {
+                clearInterval(timer);
+                button.innerHTML = "▶ DEMO MODE";
+                return;
+            }
+
+            button.innerHTML = steps[i];
+
+        }, 1000);
+
+    };
+
+}, 2000);
 // ======================================================
 // CYBERCITY DEMO MODE
 // ======================================================
