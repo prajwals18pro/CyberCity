@@ -2519,3 +2519,60 @@ setInterval(updateCommandCenter, 3000);
     }
 
 })();
+// ===============================
+// CYBERCITY SIMPLE DEMO MODE
+// ===============================
+
+const demoBtn = document.createElement("button");
+
+demoBtn.innerText = "▶ RUN CITY DEMO";
+
+demoBtn.style.cssText = `
+position:fixed;
+bottom:20px;
+right:20px;
+z-index:9999;
+padding:14px 20px;
+border:none;
+border-radius:12px;
+background:#00e5ff;
+color:#001018;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 20px #00e5ff;
+`;
+
+document.body.appendChild(demoBtn);
+
+demoBtn.onclick = function () {
+
+    const messages = [
+        "🏙️ CITY SYSTEMS STARTING...",
+        "🚦 TRAFFIC MONITORING ACTIVE",
+        "🌫️ AIR QUALITY CHECKING...",
+        "💧 WATER SYSTEM CHECKING...",
+        "⚡ ENERGY SYSTEM CHECKING...",
+        "🅿️ PARKING SYSTEM CHECKING...",
+        "🛡️ CYBER SECURITY SCAN COMPLETE",
+        "✅ CITY OPERATING NORMALLY"
+    ];
+
+    let i = 0;
+
+    demoBtn.innerText = messages[i];
+
+    const demo = setInterval(function () {
+
+        i++;
+
+        if (i >= messages.length) {
+            clearInterval(demo);
+            demoBtn.innerText = "▶ RUN CITY DEMO";
+            return;
+        }
+
+        demoBtn.innerText = messages[i];
+
+    }, 1500);
+};
