@@ -1813,3 +1813,709 @@ function updateCommandCenter() {
 
 /* Keep Command Center synchronized */
 setInterval(updateCommandCenter, 3000);
+// ======================================================
+// CYBERCITY DEMO MODE
+// ======================================================
+
+(function () {
+
+    function cyberCityDemoMode() {
+
+        // Prevent duplicate buttons
+        if (document.getElementById("cyberDemoButton")) {
+            return;
+        }
+
+        // ------------------------------------------------
+        // CREATE DEMO BUTTON
+        // ------------------------------------------------
+
+        const button = document.createElement("button");
+
+        button.id = "cyberDemoButton";
+        button.innerHTML = "▶ RUN CITY DEMO";
+
+        button.style.cssText = `
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 9999;
+
+            padding: 14px 20px;
+
+            border: 1px solid rgba(0,255,200,0.5);
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #062b3a,
+                    #03151f
+                );
+
+            color: #20e89a;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            letter-spacing: 0.5px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 0 20px rgba(0,255,200,0.18);
+
+            transition: all 0.3s ease;
+        `;
+
+        document.body.appendChild(button);
+
+
+        // ------------------------------------------------
+        // DEMO OVERLAY
+        // ------------------------------------------------
+
+        const overlay =
+            document.createElement("div");
+
+        overlay.id =
+            "cyberDemoOverlay";
+
+        overlay.style.cssText = `
+            display: none;
+
+            position: fixed;
+            inset: 0;
+
+            z-index: 10000;
+
+            background:
+                rgba(1,8,18,0.92);
+
+            backdrop-filter:
+                blur(12px);
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        `;
+
+
+        // ------------------------------------------------
+        // DEMO PANEL
+        // ------------------------------------------------
+
+        overlay.innerHTML = `
+
+            <div id="cyberDemoPanel"
+
+                style="
+                    width: min(520px, 100%);
+
+                    padding: 30px;
+
+                    border-radius: 24px;
+
+                    border:
+                        1px solid
+                        rgba(0,255,200,0.25);
+
+                    background:
+                        linear-gradient(
+                            145deg,
+                            rgba(7,27,42,0.98),
+                            rgba(2,12,22,0.98)
+                        );
+
+                    box-shadow:
+                        0 0 50px
+                        rgba(0,255,200,0.12);
+
+                    text-align: center;
+                ">
+
+                <div
+                    style="
+                        font-size: 42px;
+                        margin-bottom: 10px;
+                    "
+                >
+                    🏙️
+                </div>
+
+                <div
+                    style="
+                        color:#20e89a;
+                        font-size:11px;
+                        font-weight:800;
+                        letter-spacing:2px;
+                    "
+                >
+                    CYBERCITY DEMO MODE
+                </div>
+
+                <h2
+                    id="demoTitle"
+                    style="
+                        color:white;
+                        margin:10px 0;
+                    "
+                >
+                    Initializing City...
+                </h2>
+
+                <p
+                    id="demoDescription"
+                    style="
+                        color:#9fb2c4;
+                        line-height:1.6;
+                        margin-bottom:22px;
+                    "
+                >
+                    Preparing intelligent city simulation.
+                </p>
+
+                <div
+                    style="
+                        width:100%;
+                        height:7px;
+
+                        background:#12202d;
+
+                        border-radius:20px;
+
+                        overflow:hidden;
+                    "
+                >
+
+                    <div
+                        id="demoProgress"
+                        style="
+                            width:0%;
+                            height:100%;
+
+                            background:#20e89a;
+
+                            transition:
+                                width 0.5s ease;
+                        "
+                    ></div>
+
+                </div>
+
+                <div
+                    id="demoStep"
+                    style="
+                        color:#6f879a;
+                        font-size:12px;
+                        margin-top:12px;
+                    "
+                >
+                    Step 1 of 6
+                </div>
+
+                <button
+                    id="closeDemoButton"
+
+                    style="
+                        margin-top:25px;
+
+                        padding:10px 20px;
+
+                        border-radius:20px;
+
+                        border:
+                            1px solid
+                            rgba(255,255,255,0.15);
+
+                        background:
+                            rgba(255,255,255,0.05);
+
+                        color:white;
+
+                        cursor:pointer;
+                    "
+                >
+                    CLOSE DEMO
+                </button>
+
+            </div>
+        `;
+
+
+        document.body.appendChild(overlay);
+
+
+        // ------------------------------------------------
+        // DEMO EVENTS
+        // ------------------------------------------------
+
+        let demoRunning = false;
+
+        let demoTimer = null;
+
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                if (demoRunning) {
+                    return;
+                }
+
+                startCyberCityDemo();
+
+            }
+        );
+
+
+        document
+            .getElementById(
+                "closeDemoButton"
+            )
+            .addEventListener(
+                "click",
+                function () {
+
+                    stopCyberCityDemo();
+
+                }
+            );
+
+
+        // ------------------------------------------------
+        // SAFE UPDATE FUNCTION
+        // ------------------------------------------------
+
+        function updateElement(
+            id,
+            value
+        ) {
+
+            const element =
+                document.getElementById(id);
+
+            if (element) {
+
+                element.textContent =
+                    value;
+
+            }
+
+        }
+
+
+        // ------------------------------------------------
+        // DEMO SCENARIOS
+        // ------------------------------------------------
+
+        const scenarios = [
+
+            {
+                title:
+                    "🟢 CITY OPERATING NORMALLY",
+
+                description:
+                    "All monitored city systems are operating normally.",
+
+                status:
+                    "CITY STATUS: NORMAL",
+
+                message:
+                    "No critical conditions detected."
+            },
+
+
+            {
+                title:
+                    "🚦 TRAFFIC ACTIVITY DETECTED",
+
+                description:
+                    "The simulation detects increased traffic activity in a monitored urban zone.",
+
+                status:
+                    "CITY STATUS: ATTENTION",
+
+                message:
+                    "Traffic monitoring requires attention."
+            },
+
+
+            {
+                title:
+                    "🌫️ AIR QUALITY WARNING",
+
+                description:
+                    "The simulated AQI event triggers an environmental warning.",
+
+                status:
+                    "CITY STATUS: WARNING",
+
+                message:
+                    "Air-quality threshold requires monitoring."
+            },
+
+
+            {
+                title:
+                    "🚨 CITY ALERT ACTIVATED",
+
+                description:
+                    "CyberCity's alert layer escalates the simulated event for city operators.",
+
+                status:
+                    "CITY STATUS: WARNING",
+
+                message:
+                    "Multiple monitored conditions require attention."
+            },
+
+
+            {
+                title:
+                    "📊 COMMAND CENTER RESPONSE",
+
+                description:
+                    "The command center displays the simulated event and operational response.",
+
+                status:
+                    "CITY STATUS: MANAGED",
+
+                message:
+                    "City intelligence systems are responding."
+            },
+
+
+            {
+                title:
+                    "🟢 CITY SYSTEMS RECOVERED",
+
+                description:
+                    "The simulated event has ended and monitored systems return to normal.",
+
+                status:
+                    "CITY STATUS: NORMAL",
+
+                message:
+                    "All monitored systems are operating normally."
+            }
+
+        ];
+
+
+        // ------------------------------------------------
+        // START DEMO
+        // ------------------------------------------------
+
+        function startCyberCityDemo() {
+
+            demoRunning = true;
+
+            button.innerHTML =
+                "⏳ DEMO RUNNING...";
+
+            button.style.opacity =
+                "0.6";
+
+            overlay.style.display =
+                "flex";
+
+
+            let step = 0;
+
+
+            function runStep() {
+
+                if (!demoRunning) {
+                    return;
+                }
+
+
+                const scenario =
+                    scenarios[step];
+
+
+                const title =
+                    document.getElementById(
+                        "demoTitle"
+                    );
+
+                const description =
+                    document.getElementById(
+                        "demoDescription"
+                    );
+
+                const progress =
+                    document.getElementById(
+                        "demoProgress"
+                    );
+
+                const stepText =
+                    document.getElementById(
+                        "demoStep"
+                    );
+
+
+                title.textContent =
+                    scenario.title;
+
+
+                description.textContent =
+                    scenario.description;
+
+
+                progress.style.width =
+                    (
+                        ((step + 1) /
+                            scenarios.length) *
+                        100
+                    ) + "%";
+
+
+                stepText.textContent =
+                    "Step " +
+                    (step + 1) +
+                    " of " +
+                    scenarios.length;
+
+
+                // ----------------------------------------
+                // UPDATE EXISTING ALERT CENTER
+                // ----------------------------------------
+
+                updateElement(
+                    "alertTitle",
+                    scenario.status
+                );
+
+
+                updateElement(
+                    "alertMessage",
+                    scenario.message
+                );
+
+
+                // ----------------------------------------
+                // UPDATE COMMAND CENTER
+                // ----------------------------------------
+
+                if (step === 0) {
+
+                    updateElement(
+                        "commandAlerts",
+                        "NORMAL"
+                    );
+
+                }
+
+                else if (
+                    step === 1 ||
+                    step === 2
+                ) {
+
+                    updateElement(
+                        "commandAlerts",
+                        "ATTENTION"
+                    );
+
+                }
+
+                else if (step === 3) {
+
+                    updateElement(
+                        "commandAlerts",
+                        "ACTIVE"
+                    );
+
+                }
+
+                else {
+
+                    updateElement(
+                        "commandAlerts",
+                        "NORMAL"
+                    );
+
+                }
+
+
+                // ----------------------------------------
+                // UPDATE ALERT ICON
+                // ----------------------------------------
+
+                const alertStatus =
+                    document.getElementById(
+                        "cityAlertStatus"
+                    );
+
+
+                if (alertStatus) {
+
+                    if (
+                        step === 0 ||
+                        step === 5
+                    ) {
+
+                        alertStatus.style.borderColor =
+                            "rgba(32,232,154,0.25)";
+
+                    }
+
+                    else {
+
+                        alertStatus.style.borderColor =
+                            "rgba(255,180,50,0.4)";
+
+                    }
+
+                }
+
+
+                // ----------------------------------------
+                // SCROLL TO ALERT CENTER
+                // ----------------------------------------
+
+                if (
+                    step === 1 ||
+                    step === 2 ||
+                    step === 3
+                ) {
+
+                    const alerts =
+                        document.querySelector(
+                            ".smart-alerts"
+                        );
+
+                    if (alerts) {
+
+                        alerts.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center"
+                        });
+
+                    }
+
+                }
+
+
+                // ----------------------------------------
+                // FINISH
+                // ----------------------------------------
+
+                if (
+                    step ===
+                    scenarios.length - 1
+                ) {
+
+                    demoTimer =
+                        setTimeout(
+                            function () {
+
+                                stopCyberCityDemo();
+
+                            },
+                            3000
+                        );
+
+                    return;
+
+                }
+
+
+                step++;
+
+
+                demoTimer =
+                    setTimeout(
+                        runStep,
+                        3000
+                    );
+
+            }
+
+
+            runStep();
+
+        }
+
+
+        // ------------------------------------------------
+        // STOP DEMO
+        // ------------------------------------------------
+
+        function stopCyberCityDemo() {
+
+            demoRunning = false;
+
+
+            if (demoTimer) {
+
+                clearTimeout(
+                    demoTimer
+                );
+
+                demoTimer = null;
+
+            }
+
+
+            overlay.style.display =
+                "none";
+
+
+            button.innerHTML =
+                "▶ RUN CITY DEMO";
+
+
+            button.style.opacity =
+                "1";
+
+
+            // Restore normal display
+
+            updateElement(
+                "alertTitle",
+                "CITY STATUS: NORMAL"
+            );
+
+
+            updateElement(
+                "alertMessage",
+                "No critical conditions detected."
+            );
+
+
+            updateElement(
+                "commandAlerts",
+                "ACTIVE"
+            );
+
+        }
+
+    }
+
+
+    // ------------------------------------------------
+    // START AFTER PAGE LOAD
+    // ------------------------------------------------
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            cyberCityDemoMode
+        );
+
+    }
+
+    else {
+
+        cyberCityDemoMode();
+
+    }
+
+})();
