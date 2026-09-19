@@ -2117,4 +2117,142 @@ footer {
         padding: 22px;
     }
 }
+/* =================================
+   CYBERCITY CLEAN MOBILE UI
+================================= */
+
+/* Hide the duplicate Executive Dashboard */
+.executive-dashboard + .executive-dashboard {
+    display: none !important;
+}
+
+/* Reduce excessive section spacing */
+section {
+    margin-top: 45px !important;
+    margin-bottom: 45px !important;
+}
+
+/* Cleaner section headings */
+.section-heading {
+    margin-bottom: 24px !important;
+}
+
+/* Smart city cards */
+.cards {
+    gap: 12px !important;
+}
+
+.city-card {
+    min-height: 105px !important;
+    padding: 16px !important;
+}
+
+/* Map section */
+.map-section {
+    margin-top: 35px !important;
+    padding: 18px !important;
+}
+
+#cityMap {
+    height: 330px !important;
+}
+
+/* Alert section */
+.smart-alerts {
+    margin-top: 40px !important;
+}
+
+/* Executive dashboard */
+.executive-dashboard {
+    margin-top: 40px !important;
+    margin-bottom: 40px !important;
+}
+
+/* Executive cards */
+.executive-summary {
+    gap: 12px !important;
+}
+
+.executive-card {
+    padding: 15px !important;
+}
+
+/* Command Center */
+.command-center {
+    margin-top: 45px !important;
+}
+
+/* Street Intelligence */
+.street-intelligence {
+    margin-top: 45px !important;
+}
+
+/* Mobile cleanup */
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: 380px !important;
+        padding: 45px 20px !important;
+    }
+
+    .hero h1 {
+        font-size: 42px !important;
+        line-height: 1.05 !important;
+    }
+
+    .hero .description {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .city-card {
+        min-height: 110px !important;
+        padding: 13px !important;
+    }
+
+    .city-card .icon {
+        font-size: 22px !important;
+    }
+
+    .city-card h3 {
+        font-size: 14px !important;
+    }
+
+    .city-card p {
+        font-size: 11px !important;
+    }
+
+    .city-card strong {
+        font-size: 9px !important;
+    }
+
+    .map-section {
+        padding: 14px !important;
+    }
+
+    #cityMap {
+        height: 300px !important;
+    }
+
+    .executive-summary {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .executive-systems {
+        grid-template-columns: 1fr !important;
+    }
+
+    .command-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .alert-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
 
