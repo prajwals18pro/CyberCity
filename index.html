@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -15,12 +14,10 @@
     <!-- Leaflet Map -->
     <link rel="stylesheet"
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
 </head>
 
 
 <body>
-
 
 <!-- =========================
      NAVBAR
@@ -66,10 +63,13 @@
             one intelligent city dashboard.
         </p>
 
-        <button class="explore-btn"
-                id="exploreButton"
-                type="button">
+        <button
+            class="explore-btn"
+            id="exploreButton"
+            type="button">
+
             Explore City →
+
         </button>
 
     </div>
@@ -82,8 +82,9 @@
      CITY DASHBOARD
 ========================= -->
 
-<section class="dashboard"
-         id="city-dashboard">
+<section
+    class="dashboard"
+    id="city-dashboard">
 
 
     <div class="section-heading">
@@ -106,7 +107,7 @@
 
 
 <!-- =========================
-     15 SYSTEMS
+     15 CITY SYSTEMS
 ========================= -->
 
 <div class="cards">
@@ -237,10 +238,11 @@
 
 
 <!-- =========================
-     INTERACTIVE MAP
+     INTERACTIVE CITY MAP
 ========================= -->
 
 <div class="map-section">
+
 
     <div class="map-header">
 
@@ -272,13 +274,17 @@
     </div>
 
 
+
     <div class="map-container">
+
 
         <div id="cityMap"></div>
 
 
-        <div class="location-panel"
-             id="locationPanel">
+        <div
+            class="location-panel"
+            id="locationPanel">
+
 
             <div class="panel-top">
 
@@ -286,9 +292,12 @@
                     📍 SELECTED LOCATION
                 </span>
 
-                <button id="closeLocation"
-                        type="button">
+                <button
+                    id="closeLocation"
+                    type="button">
+
                     ×
+
                 </button>
 
             </div>
@@ -307,35 +316,42 @@
 
             <div class="location-data">
 
+
                 <div>
                     <span>🚦 Traffic</span>
                     <strong id="trafficData">--</strong>
                 </div>
+
 
                 <div>
                     <span>🌫️ Air Quality</span>
                     <strong id="airData">--</strong>
                 </div>
 
+
                 <div>
                     <span>💧 Water</span>
                     <strong id="waterData">--</strong>
                 </div>
+
 
                 <div>
                     <span>⚡ Energy</span>
                     <strong id="energyData">--</strong>
                 </div>
 
+
                 <div>
                     <span>💡 Lighting</span>
                     <strong id="lightData">--</strong>
                 </div>
 
+
                 <div>
                     <span>🅿️ Parking</span>
                     <strong id="parkingData">--</strong>
                 </div>
+
 
             </div>
 
@@ -347,11 +363,12 @@
 
 
 
-<!-- ==================================================
+<!-- =========================
      SMART ALERT CENTER
-================================================== -->
+========================= -->
 
 <section class="smart-alerts">
+
 
     <div class="section-heading">
 
@@ -370,12 +387,15 @@
     </div>
 
 
-    <div class="alert-status"
-         id="cityAlertStatus">
+    <div
+        class="alert-status"
+        id="cityAlertStatus">
+
 
         <div class="alert-icon">
             🟢
         </div>
+
 
         <div>
 
@@ -390,6 +410,7 @@
         </div>
 
     </div>
+
 
 
     <div class="alert-grid">
@@ -478,7 +499,7 @@
 
 
 <!-- ==================================================
-     EXECUTIVE DASHBOARD ⭐ NEW
+     SINGLE EXECUTIVE DASHBOARD
 ================================================== -->
 
 <section class="executive-dashboard">
@@ -503,375 +524,246 @@
 
 
 
-    <!-- SUMMARY CARDS -->
+<!-- SUMMARY CARDS -->
 
-    <div class="executive-summary">
+<div class="executive-summary">
 
 
-        <div class="executive-card">
+    <div class="executive-card">
 
-            <span class="executive-icon">
-                🏙️
-            </span>
-
-            <small>
-                CITY SYSTEMS
-            </small>
-
-            <strong>
-                15
-            </strong>
-
-            <p>
-                Monitored Systems
-            </p>
-
-        </div>
-
-
-        <div class="executive-card">
-
-            <span class="executive-icon">
-                🟢
-            </span>
-
-            <small>
-                SYSTEM HEALTH
-            </small>
-
-            <strong>
-                98%
-            </strong>
-
-            <p>
-                Operational
-            </p>
-
-        </div>
-
-
-        <div class="executive-card">
-
-            <span class="executive-icon">
-                📡
-            </span>
-
-            <small>
-                IoT NETWORK
-            </small>
-
-            <strong>
-                ONLINE
-            </strong>
-
-            <p>
-                Connected Sensors
-            </p>
-
-        </div>
-
-
-        <div class="executive-card">
-
-            <span class="executive-icon">
-                🚨
-            </span>
-
-            <small>
-                CITY ALERTS
-            </small>
-
-            <strong id="executiveAlerts">
-                NORMAL
-            </strong>
-
-            <p>
-                Current Status
-            </p>
-
-        </div>
-
-
-    </div>
-
-
-
-    <!-- SYSTEM OVERVIEW -->
-
-    <div class="executive-systems">
-
-
-        <div class="executive-system">
-
-            <span>🚦</span>
-
-            <div>
-
-                <strong>
-                    Traffic Management
-                </strong>
-
-                <small>
-                    Operational
-                </small>
-
-            </div>
-
-            <b>🟢</b>
-
-        </div>
-
-
-        <div class="executive-system">
-
-            <span>🌫️</span>
-
-            <div>
-
-                <strong>
-                    Air Quality
-                </strong>
-
-                <small>
-                    Monitoring
-                </small>
-
-            </div>
-
-            <b>🟢</b>
-
-        </div>
-
-
-        <div class="executive-system">
-
-            <span>💧</span>
-
-            <div>
-
-                <strong>
-                    Water Network
-                </strong>
-
-                <small>
-                    Operational
-                </small>
-
-            </div>
-
-            <b>🟢</b>
-
-        </div>
-
-
-        <div class="executive-system">
-
-            <span>⚡</span>
-
-            <div>
-
-                <strong>
-                    Energy Management
-                </strong>
-
-                <small>
-                    Operational
-                </small>
-
-            </div>
-
-            <b>🟢</b>
-
-        </div>
-
-
-        <div class="executive-system">
-
-            <span>🚑</span>
-
-            <div>
-
-                <strong>
-                    Emergency Services
-                </strong>
-
-                <small>
-                    Ready
-                </small>
-
-            </div>
-
-            <b>🟢</b>
-
-        </div>
-
-
-        <div class="executive-system">
-
-            <span>🚌</span>
-
-            <div>
-
-                <strong>
-                    Public Transport
-                </strong>
-
-                <small>
-                    Operational
-                </small>
-
-            </div>
-
-            <b>🟢</b>
-
-        </div>
-
-
-    </div>
-
-
-
-    <div class="executive-footer">
-
-        <span>
-            🟢 CITY HEALTH: EXCELLENT
+        <span class="executive-icon">
+            🏙️
         </span>
 
-        <span>
-            📡 15 SYSTEMS MONITORED
-        </span>
+        <small>
+            CITY SYSTEMS
+        </small>
 
-    </div>
-
-
-</section>
-    <!-- EXECUTIVE DASHBOARD -->
-<section class="executive-dashboard">
-
-    <div class="section-heading">
-        <span class="section-tag">EXECUTIVE INTELLIGENCE</span>
-
-        <h2>🏙️ Executive Dashboard</h2>
+        <strong>
+            15
+        </strong>
 
         <p>
-            High-level overview of CyberCity operations and system health.
+            Monitored Systems
         </p>
-    </div>
-
-
-    <!-- SUMMARY CARDS -->
-    <div class="executive-summary">
-
-        <div class="executive-card">
-            <span>🏙️</span>
-            <small>CITY SYSTEMS</small>
-            <strong>15</strong>
-            <p>Monitored Systems</p>
-        </div>
-
-
-        <div class="executive-card">
-            <span>🟢</span>
-            <small>SYSTEM HEALTH</small>
-            <strong>98%</strong>
-            <p>Operational</p>
-        </div>
-
-
-        <div class="executive-card">
-            <span>📡</span>
-            <small>IoT NETWORK</small>
-            <strong>ONLINE</strong>
-            <p>Connected Sensors</p>
-        </div>
-
-
-        <div class="executive-card">
-            <span>🚨</span>
-            <small>CITY ALERTS</small>
-            <strong>NORMAL</strong>
-            <p>Current Status</p>
-        </div>
 
     </div>
 
 
-    <!-- SYSTEM OVERVIEW -->
-    <div class="executive-systems">
 
-        <div class="executive-system">
-            <span>🚦</span>
-            <div>
-                <strong>Traffic Management</strong>
-                <small>Operational</small>
-            </div>
-            <b>🟢</b>
-        </div>
+    <div class="executive-card">
 
+        <span class="executive-icon">
+            🟢
+        </span>
 
-        <div class="executive-system">
-            <span>🌫️</span>
-            <div>
-                <strong>Air Quality</strong>
-                <small>Monitoring</small>
-            </div>
-            <b>🟢</b>
-        </div>
+        <small>
+            SYSTEM HEALTH
+        </small>
 
+        <strong>
+            98%
+        </strong>
 
-        <div class="executive-system">
-            <span>💧</span>
-            <div>
-                <strong>Water Network</strong>
-                <small>Operational</small>
-            </div>
-            <b>🟢</b>
-        </div>
-
-
-        <div class="executive-system">
-            <span>⚡</span>
-            <div>
-                <strong>Energy Management</strong>
-                <small>Operational</small>
-            </div>
-            <b>🟢</b>
-        </div>
-
-
-        <div class="executive-system">
-            <span>🚑</span>
-            <div>
-                <strong>Emergency Services</strong>
-                <small>Ready</small>
-            </div>
-            <b>🟢</b>
-        </div>
-
-
-        <div class="executive-system">
-            <span>🚌</span>
-            <div>
-                <strong>Public Transport</strong>
-                <small>Operational</small>
-            </div>
-            <b>🟢</b>
-        </div>
+        <p>
+            Operational
+        </p>
 
     </div>
 
 
-    <!-- EXECUTIVE FOOTER -->
-    <div class="executive-footer">
 
-        <span>🟢 CITY HEALTH: EXCELLENT</span>
+    <div class="executive-card">
 
-        <span>📡 15 SYSTEMS MONITORED</span>
+        <span class="executive-icon">
+            📡
+        </span>
+
+        <small>
+            IoT NETWORK
+        </small>
+
+        <strong>
+            ONLINE
+        </strong>
+
+        <p>
+            Connected Sensors
+        </p>
 
     </div>
+
+
+
+    <div class="executive-card">
+
+        <span class="executive-icon">
+            🚨
+        </span>
+
+        <small>
+            CITY ALERTS
+        </small>
+
+        <strong id="executiveAlerts">
+            NORMAL
+        </strong>
+
+        <p>
+            Current Status
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- SYSTEM OVERVIEW -->
+
+<div class="executive-systems">
+
+
+    <div class="executive-system">
+
+        <span>🚦</span>
+
+        <div>
+            <strong>
+                Traffic Management
+            </strong>
+
+            <small>
+                Operational
+            </small>
+        </div>
+
+        <b>🟢</b>
+
+    </div>
+
+
+
+    <div class="executive-system">
+
+        <span>🌫️</span>
+
+        <div>
+            <strong>
+                Air Quality
+            </strong>
+
+            <small>
+                Monitoring
+            </small>
+        </div>
+
+        <b>🟢</b>
+
+    </div>
+
+
+
+    <div class="executive-system">
+
+        <span>💧</span>
+
+        <div>
+            <strong>
+                Water Network
+            </strong>
+
+            <small>
+                Operational
+            </small>
+        </div>
+
+        <b>🟢</b>
+
+    </div>
+
+
+
+    <div class="executive-system">
+
+        <span>⚡</span>
+
+        <div>
+            <strong>
+                Energy Management
+            </strong>
+
+            <small>
+                Operational
+            </small>
+        </div>
+
+        <b>🟢</b>
+
+    </div>
+
+
+
+    <div class="executive-system">
+
+        <span>🚑</span>
+
+        <div>
+            <strong>
+                Emergency Services
+            </strong>
+
+            <small>
+                Ready
+            </small>
+        </div>
+
+        <b>🟢</b>
+
+    </div>
+
+
+
+    <div class="executive-system">
+
+        <span>🚌</span>
+
+        <div>
+            <strong>
+                Public Transport
+            </strong>
+
+            <small>
+                Operational
+            </small>
+        </div>
+
+        <b>🟢</b>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- EXECUTIVE FOOTER -->
+
+<div class="executive-footer">
+
+    <span>
+        🟢 CITY HEALTH: EXCELLENT
+    </span>
+
+    <span>
+        📡 15 SYSTEMS MONITORED
+    </span>
+
+</div>
+
 
 </section>
-    
 
 
 
@@ -900,11 +792,14 @@
     </div>
 
 
+
     <div class="command-status">
+
 
         <div class="status-light">
             🟢
         </div>
+
 
         <div>
 
@@ -918,7 +813,9 @@
 
         </div>
 
+
     </div>
+
 
 
     <div class="command-grid">
@@ -939,6 +836,7 @@
         </div>
 
 
+
         <div class="command-card">
 
             <span>🌫️</span>
@@ -952,6 +850,7 @@
             </strong>
 
         </div>
+
 
 
         <div class="command-card">
@@ -969,6 +868,7 @@
         </div>
 
 
+
         <div class="command-card">
 
             <span>🚨</span>
@@ -984,6 +884,7 @@
         </div>
 
 
+
         <div class="command-card">
 
             <span>📡</span>
@@ -997,6 +898,7 @@
             </strong>
 
         </div>
+
 
 
         <div class="command-card">
@@ -1015,6 +917,7 @@
 
 
     </div>
+
 
 
     <div class="command-footer">
@@ -1059,10 +962,12 @@
     </div>
 
 
+
     <div class="street-box">
 
 
         <div class="search-area">
+
 
             <input
                 type="text"
@@ -1080,7 +985,9 @@
 
             </button>
 
+
         </div>
+
 
 
         <div
